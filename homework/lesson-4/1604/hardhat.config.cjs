@@ -1,7 +1,13 @@
 require("@nomicfoundation/hardhat-toolbox");
+require("@typechain/hardhat");
+require("@openzeppelin/hardhat-upgrades");
 
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
+  typechain: {
+    outDir: "typechain-types",
+    target: "ethers-v6",
+  },
   solidity: {
     compilers: [
       {

@@ -15,11 +15,15 @@ contract UpgradableContractV2 is Initializable, UUPSUpgradeable, OwnableUpgradea
     uint256 public newValue;
     bool public newFeatureEnabled;
 
+    /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() { _disableInitializers(); }
 
-    // 保留 V1 的 initialize（但通常不再使用）
-    function initialize(string memory, uint256) public initializer {
-        revert("Use V1 initializer only");
+    function initialize(string memory _name, uint256 _value) public initializer {
+        __Ownable_init(msg.sender);
+        __UUPSUpgradeable_init();
+        value = _value;
+        name = _name;
+        newFeatureEnabled = false;
     }
 
     // 新初始化函数
